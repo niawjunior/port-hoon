@@ -22,9 +22,11 @@ const AntLayout: FC = ({ children }) => {
       <Layout>
         <Header className="bg-white p-0" />
         <Content className="m-2">
-          <StyledContent className="bg-white p-8">{children}</StyledContent>
+          <StyledContent className="bg-white pl-6 p-2">
+            {children}
+          </StyledContent>
         </Content>
-        <Footer className="text-center">โปรแกรมคำนวณหุ้น</Footer>
+        <Footer className="text-center">โปรแกรมคำนวณรายได้</Footer>
       </Layout>
     </Layout>
   );
