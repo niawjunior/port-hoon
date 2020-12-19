@@ -10,7 +10,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Router>
       <RecoilRoot>
-        <App />
+        <React.Suspense fallback={<div>Loading...</div>}>
+          <App />
+        </React.Suspense>
       </RecoilRoot>
     </Router>
   </React.StrictMode>,

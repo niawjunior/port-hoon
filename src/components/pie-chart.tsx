@@ -2,24 +2,28 @@ import { FC } from "react";
 import ReactEcharts from "echarts-for-react";
 
 const Pie: FC = () => {
-  return (
-    <ReactEcharts
-      option={{
-        xAxis: {
-          type: "category",
-          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-        },
-        yAxis: {
-          type: "value",
-        },
-        series: [
-          {
-            data: [820, 932, 901, 934, 1290, 1330, 1320],
-            type: "line",
-          },
-        ],
-      }}
-    />
-  );
+  const option = {
+    title: {
+      text: "同名数量统计",
+      subtext: "纯属虚构",
+      left: "center",
+    },
+    tooltip: {
+      trigger: "item",
+      formatter: "{a} <br/>{b} : {c} ({d}%)",
+    },
+    legend: {
+      type: "scroll",
+      orient: "vertical",
+      right: 10,
+      top: 20,
+      bottom: 20,
+      data: 10,
+
+      selected: 4,
+    },
+  };
+
+  return <ReactEcharts option={option} />;
 };
 export default Pie;

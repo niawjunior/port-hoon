@@ -1,13 +1,17 @@
 import React, { FC } from "react";
 import { Row, Col, Divider } from "antd";
+import { formState } from "../store/atoms";
 
 import AntLayout from "../components/layout";
 import MainForm from "../components/form";
 import Summary from "../components/summary";
+import { useSetRecoilState } from "recoil";
 
 const Home: FC = () => {
+  const setForm = useSetRecoilState(formState);
+
   const submitForm = (value: any) => {
-    console.log(value);
+    setForm((oldState) => [...oldState, value as never]);
   };
   return (
     <AntLayout>
