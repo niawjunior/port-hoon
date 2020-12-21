@@ -29,14 +29,14 @@ const MainForm: FC<FormProps> = ({ submitForm }) => {
       onFinish={onFinish}
       autoComplete="off"
       initialValues={{
-        users: [
+        port: [
           {
             symbol: "",
           },
         ],
       }}
     >
-      <Form.List name="users">
+      <Form.List name="port">
         {(fields, { add, remove }) => (
           <>
             {fields.map((field) => (

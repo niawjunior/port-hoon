@@ -7,15 +7,13 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Router>
-      <RecoilRoot>
-        <React.Suspense fallback={<div>Loading...</div>}>
-          <App />
-        </React.Suspense>
-      </RecoilRoot>
-    </Router>
-  </React.StrictMode>,
+  <Router>
+    <RecoilRoot>
+      <React.Suspense fallback={<div>Loading...</div>}>
+        <App />
+      </React.Suspense>
+    </RecoilRoot>
+  </Router>,
   document.getElementById("root")
 );
 

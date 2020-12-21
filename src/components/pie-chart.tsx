@@ -1,29 +1,45 @@
 import { FC } from "react";
-import ReactEcharts from "echarts-for-react";
+import { ResponsivePie } from "@nivo/pie";
 
-const Pie: FC = () => {
-  const option = {
-    title: {
-      text: "同名数量统计",
-      subtext: "纯属虚构",
-      left: "center",
-    },
-    tooltip: {
-      trigger: "item",
-      formatter: "{a} <br/>{b} : {c} ({d}%)",
-    },
-    legend: {
-      type: "scroll",
-      orient: "vertical",
-      right: 10,
-      top: 20,
-      bottom: 20,
-      data: 10,
+interface IForm {
+  available: string;
+  avg: string;
+  market: string;
+  symbol: string;
+}
 
-      selected: 4,
-    },
-  };
+interface PieProps {
+  data: IForm[];
+}
 
-  return <ReactEcharts option={option} />;
+const Pie: FC<PieProps> = ({ data }) => {
+  const pieData = data.map((item) => {
+    return {
+      id: item.symbol,
+      label: item.symbol.toUpperCase(),
+      value: Number(item.available),
+    };
+  });
+
+  return (
+    <ResponsivePie
+      data={pieData}
+      margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
+      innerRadius={0.5}
+      padAngle={2}
+      cornerRadius={5}
+      colors={{ scheme: "nivo" }}
+      borderWidth={0}
+      borderColor={{ from: "color", modifiers: [["darker", 0.2]] }}
+      radialLabelsSkipAngle={10}
+      radialLabelsLinkDiagonalLength={8}
+      radialLabelsLinkHorizontalLength={8}
+      radialLabelsTextColor="#333333"
+      radialLabelsLinkColor={{ from: "color" }}
+      sliceLabelsSkipAngle={10}
+      sliceLabelsTextColor="#333333"
+    />
+  );
 };
+
 export default Pie;
