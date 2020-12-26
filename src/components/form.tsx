@@ -1,4 +1,4 @@
-import { Form, Input, InputNumber, Button, Space, Row, Col } from "antd";
+import { Form, Input, Button, Space, Row, Col } from "antd";
 import {
   MinusCircleOutlined,
   PlusOutlined,
