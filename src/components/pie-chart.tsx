@@ -16,7 +16,7 @@ const Pie: FC<PieProps> = ({ data }) => {
   const pieData = data.map((item) => {
     return {
       id: item.symbol,
-      label: item.symbol.toUpperCase(),
+      label: item.symbol,
       value: Number(item.available),
     };
   });
@@ -36,6 +36,7 @@ const Pie: FC<PieProps> = ({ data }) => {
       radialLabelsLinkHorizontalLength={8}
       radialLabelsTextColor="#333333"
       radialLabelsLinkColor={{ from: "color" }}
+      radialLabelsLinkStrokeWidth={3}
       sliceLabelsSkipAngle={10}
       sliceLabelsTextColor="#333333"
     />

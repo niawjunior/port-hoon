@@ -1,4 +1,4 @@
-import { Form, Input, Button, Space, Row, Col } from "antd";
+import { Form, Input, InputNumber, Button, Space, Row, Col } from "antd";
 import {
   MinusCircleOutlined,
   PlusOutlined,
@@ -18,6 +18,7 @@ const MainForm: FC<FormProps> = ({ submitForm }) => {
   };
 
   const layout = {
+    labelCol: { span: 24 },
     wrapperCol: { span: 24 },
   };
 
@@ -44,6 +45,7 @@ const MainForm: FC<FormProps> = ({ submitForm }) => {
                 <Row key={field.key} gutter={[16, 0]}>
                   <Col lg={6} sm={24} xs={24}>
                     <Form.Item
+                      label="ชื่อหุ้น"
                       {...field}
                       name={[field.name, "symbol"]}
                       fieldKey={[field.fieldKey, "symbol"]}
@@ -60,6 +62,7 @@ const MainForm: FC<FormProps> = ({ submitForm }) => {
 
                   <Col lg={6} sm={24} xs={24}>
                     <Form.Item
+                      label="จำนวนหุ้นที่มี"
                       {...field}
                       name={[field.name, "available"]}
                       fieldKey={[field.fieldKey, "available"]}
@@ -72,6 +75,7 @@ const MainForm: FC<FormProps> = ({ submitForm }) => {
                   </Col>
                   <Col lg={6} sm={24} xs={24}>
                     <Form.Item
+                      label="ราคาที่ซื้อมา"
                       {...field}
                       name={[field.name, "avg"]}
                       fieldKey={[field.fieldKey, "avg"]}
@@ -84,6 +88,7 @@ const MainForm: FC<FormProps> = ({ submitForm }) => {
                   </Col>
                   <Col lg={6} sm={24} xs={24}>
                     <Form.Item
+                      label="ราคาในปัจจุบัน"
                       {...field}
                       name={[field.name, "market"]}
                       fieldKey={[field.fieldKey, "market"]}
