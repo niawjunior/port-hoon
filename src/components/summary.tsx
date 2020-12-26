@@ -1,5 +1,10 @@
 import { Card, Alert } from "antd";
-import { DollarCircleOutlined, PercentageOutlined } from "@ant-design/icons";
+import {
+  DollarCircleOutlined,
+  PercentageOutlined,
+  FallOutlined,
+  RiseOutlined,
+} from "@ant-design/icons";
 import { useRecoilValue } from "recoil";
 import { getFormState } from "../store/selectors";
 import Pie from "./pie-chart";
@@ -19,10 +24,7 @@ const Summary = () => {
   const totalText: any =
     totalCurrentAmount < totalAvgAmount
       ? totalAvgAmount - totalCurrentAmount
-      : totalCurrentAmount - totalAvgAmount
-      ? "-" + numeral(totalAvgAmount - totalCurrentAmount).format(0, 0)
-      : "+" + numeral(totalCurrentAmount - totalAvgAmount).format(0, 0);
-
+      : totalCurrentAmount - totalAvgAmount;
   return (
     <Card title="สรุป" size="small">
       <div
@@ -36,13 +38,8 @@ const Summary = () => {
       {formState.length > 0 && (
         <>
           <Alert
-            message={`จำนวนหุ้น ${formState.length}`}
-            type="info"
-            showIcon
-          />
-          <Alert
             style={{ marginTop: "5px" }}
-            message={`เงินลงทุน ${numeral(totalAvgAmount).format(0, 0)}`}
+            message={`เงินลงทุน ${numeral(totalAvgAmount).format(0, 0)} บาท`}
             type="info"
             showIcon
             icon={<DollarCircleOutlined />}
@@ -51,11 +48,11 @@ const Summary = () => {
             style={{ marginTop: "5px" }}
             message={`กำไร/ขาดทุน ${
               totalCurrentAmount < totalAvgAmount
-                ? `-${numeral(totalText).format(0, 0)} (-${(
+                ? `-${numeral(totalText).format(0, 0)} บาท (-${(
                     (totalText * 100) /
                     totalAvgAmount
                   ).toFixed(2)}%)`
-                : `${numeral(totalText).format(0, 0)} (+${(
+                : `+${numeral(totalText).format(0, 0)} บาท (+${(
                     (totalText * 100) /
                     totalAvgAmount
                   ).toFixed(2)}%)`
@@ -63,6 +60,21 @@ const Summary = () => {
             type={totalCurrentAmount < totalAvgAmount ? "error" : "success"}
             showIcon
             icon={<PercentageOutlined />}
+          />
+          <Alert
+            style={{ marginTop: "5px" }}
+            message={`ยอดคงเหลือ (ไม่รวมภาษี) = ${numeral(
+              totalCurrentAmount
+            ).format(0, 0)} บาท`}
+            type={totalCurrentAmount < totalAvgAmount ? "error" : "success"}
+            showIcon
+            icon={
+              totalCurrentAmount < totalAvgAmount ? (
+                <FallOutlined />
+              ) : (
+                <RiseOutlined />
+              )
+            }
           />
         </>
       )}

@@ -2,7 +2,7 @@ import { Form, Input, Button, Space, Row, Col } from "antd";
 import {
   MinusCircleOutlined,
   PlusOutlined,
-  SaveOutlined,
+  CalculatorOutlined,
 } from "@ant-design/icons";
 import { FC } from "react";
 
@@ -117,8 +117,13 @@ const MainForm: FC<FormProps> = ({ submitForm }) => {
         )}
       </Form.List>
       <Form.Item>
-        <Button type="primary" htmlType="submit" block icon={<SaveOutlined />}>
-          บันทึก
+        <Button
+          type="primary"
+          htmlType="submit"
+          block
+          icon={<CalculatorOutlined />}
+        >
+          คำนวณ
         </Button>
       </Form.Item>
     </Form>
