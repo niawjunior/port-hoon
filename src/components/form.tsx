@@ -1,10 +1,10 @@
-import { Form, Input, Button, Space, Row, Col } from "antd";
+import { Form, Input, Button, Space, Row, Col, InputNumber } from "antd";
 import {
   MinusCircleOutlined,
   PlusOutlined,
   CalculatorOutlined,
 } from "@ant-design/icons";
-import { FC } from "react";
+import { FC, useState } from "react";
 
 interface FormProps {
   submitForm: (value: any) => typeof value;
@@ -12,7 +12,7 @@ interface FormProps {
 
 const MainForm: FC<FormProps> = ({ submitForm }) => {
   const [form] = Form.useForm();
-
+  const [setData, data] = useState([] as any);
   const onFinish = (values: any) => {
     submitForm(values);
   };
@@ -22,8 +22,11 @@ const MainForm: FC<FormProps> = ({ submitForm }) => {
     wrapperCol: { span: 24 },
   };
 
+  const onFormChange = () => {};
+
   return (
     <Form
+      onChange={onFormChange}
       {...layout}
       form={form}
       name="formCalculate"
@@ -48,6 +51,7 @@ const MainForm: FC<FormProps> = ({ submitForm }) => {
                       label="ชื่อหุ้น"
                       {...field}
                       name={[field.name, "symbol"]}
+                      normalize={(value) => (value || "").toUpperCase()}
                       fieldKey={[field.fieldKey, "symbol"]}
                       rules={[
                         {
@@ -67,10 +71,24 @@ const MainForm: FC<FormProps> = ({ submitForm }) => {
                       name={[field.name, "available"]}
                       fieldKey={[field.fieldKey, "available"]}
                       rules={[
-                        { required: true, message: "กรุณากรอกจำนวนหุ้นที่มี" },
+                        {
+                          required: true,
+                          message: "กรุณากรอกจำนวนหุ้นที่มี",
+                          type: "number",
+                          min: 1,
+                        },
                       ]}
                     >
-                      <Input placeholder="จำนวน" type="number" />
+                      <InputNumber
+                        formatter={(value) =>
+                          `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                        }
+                        parser={(value) =>
+                          value ? value.replace(/\$\s?|(,*)/g, "") : ""
+                        }
+                        className="w-full"
+                        placeholder="จำนวน"
+                      />
                     </Form.Item>
                   </Col>
                   <Col lg={6} sm={24} xs={24}>
@@ -80,23 +98,36 @@ const MainForm: FC<FormProps> = ({ submitForm }) => {
                       name={[field.name, "avg"]}
                       fieldKey={[field.fieldKey, "avg"]}
                       rules={[
-                        { required: true, message: "กรุณากรอกราคาที่ซื้อมา" },
+                        {
+                          required: true,
+                          message: "กรุณากรอกราคาที่ซื้อมา",
+                        },
                       ]}
                     >
-                      <Input placeholder="ราคาที่ซื้อมา" type="number" />
+                      <InputNumber
+                        className="w-full"
+                        placeholder="ราคาที่ซื้อมา"
+                      />
                     </Form.Item>
                   </Col>
                   <Col lg={6} sm={24} xs={24}>
                     <Form.Item
+                      className="current-amount"
                       label="ราคาในปัจจุบัน"
                       {...field}
                       name={[field.name, "market"]}
                       fieldKey={[field.fieldKey, "market"]}
                       rules={[
-                        { required: true, message: "กรุณากรอกราคาในปัจจุบัน" },
+                        {
+                          required: true,
+                          message: "กรุณากรอกราคาในปัจจุบัน",
+                        },
                       ]}
                     >
-                      <Input placeholder="ราคาปัจจุบัน" type="number" />
+                      <InputNumber
+                        className="w-full"
+                        placeholder="ราคาปัจจุบัน"
+                      />
                     </Form.Item>
                   </Col>
                 </Row>

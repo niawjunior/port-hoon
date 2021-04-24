@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { ResponsivePie } from "@nivo/pie";
-
+const numeral = require("numeral");
 interface IForm {
   available: string;
   avg: string;
@@ -21,6 +21,12 @@ const Pie: FC<PieProps> = ({ data }) => {
     };
   });
 
+  const findData = (id: string) => data.find((item) => item.symbol === id);
+  const getPercentageChange = (oldNumber: number, newNumber: number) => {
+    const decreaseValue = Math.abs(oldNumber - newNumber);
+    const result = ((decreaseValue / oldNumber) * 100).toFixed(2);
+    return oldNumber <= newNumber ? "+" + result : "-" + result;
+  };
   return (
     <ResponsivePie
       data={pieData}
@@ -39,6 +45,30 @@ const Pie: FC<PieProps> = ({ data }) => {
       radialLabelsLinkStrokeWidth={3}
       sliceLabelsSkipAngle={10}
       sliceLabelsTextColor="#333333"
+      tooltip={(input) => {
+        console.log(input.datum.color);
+        return (
+          <div className="w-60 text-center h-full bg-yellow-200	 rounded-sm shadow-lg relative flex items-center p-2">
+            <div
+              style={{
+                width: "25px",
+                height: "15px",
+                backgroundColor: input.datum?.color,
+              }}
+            ></div>
+            <span className="px-2 text-xs break-words">
+              {`${input.datum.id} ${numeral(input.datum?.data?.value).format(
+                "0.0a"
+              )} หุ้น avg ${findData(String(input.datum.id))?.avg} market ${
+                findData(String(input.datum.id))?.market
+              } %U.PL ${getPercentageChange(
+                Number(findData(String(input.datum.id))?.avg),
+                Number(findData(String(input.datum.id))?.market)
+              )}`}
+            </span>
+          </div>
+        );
+      }}
     />
   );
 };

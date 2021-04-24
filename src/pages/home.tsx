@@ -16,7 +16,7 @@ const Home: FC = () => {
   return (
     <AntLayout>
       <Row gutter={[16, 0]} justify="space-between">
-        <h1 className="text-xl m-8">คำนวณรายได้</h1>
+        <h1 className="text-xl m-8">คำนวณ มูลค่าพอร์ตหุ้น</h1>
         <Divider />
         <Col lg={14} md={12} sm={24} xs={24}>
           <MainForm submitForm={submitForm} />

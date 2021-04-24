@@ -26,7 +26,7 @@ const AntLayout: FC = ({ children }) => {
             {children}
           </StyledContent>
         </Content>
-        <Footer className="text-center">โปรแกรมคำนวณรายได้</Footer>
+        <Footer className="text-center">โปรแกรมคำนวณมูลค่าพอร์ตหุ้น</Footer>
       </Layout>
     </Layout>
   );
