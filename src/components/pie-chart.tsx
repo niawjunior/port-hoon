@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { ResponsivePie } from "@nivo/pie";
+import { FallOutlined, RiseOutlined } from "@ant-design/icons";
 const numeral = require("numeral");
 interface IForm {
   available: string;
@@ -7,7 +8,9 @@ interface IForm {
   market: string;
   symbol: string;
 }
-
+// <FallOutlined />
+//             ) : (
+//               <RiseOutlined />
 interface PieProps {
   data: IForm[];
 }
@@ -46,6 +49,7 @@ const Pie: FC<PieProps> = ({ data }) => {
       sliceLabelsSkipAngle={10}
       sliceLabelsTextColor="#333333"
       tooltip={(input) => {
+        const data = findData(String(input.datum.id));
         return (
           <div className="w-60 text-center h-full bg-yellow-200	 rounded-sm shadow-lg relative flex items-center p-2">
             <div
@@ -58,14 +62,19 @@ const Pie: FC<PieProps> = ({ data }) => {
             <span className="px-2 text-xs break-words">
               {`Symbol ${input.datum.id} Vol ${numeral(
                 input.datum?.data?.value
-              ).format("0.0a")} Avg ${
-                findData(String(input.datum.id))?.avg
-              } Market ${
-                findData(String(input.datum.id))?.market
+              ).format("0.0a")} Avg ${data?.avg} Market ${
+                data?.market
               } %U.PL ${getPercentageChange(
-                Number(findData(String(input.datum.id))?.avg),
-                Number(findData(String(input.datum.id))?.market)
-              )}`}
+                Number(data?.avg),
+                Number(data?.market)
+              )}`}{" "}
+              {data ? (
+                data?.avg < data?.market ? (
+                  <RiseOutlined className="text-green-500" />
+                ) : data?.avg === data?.market ? null : (
+                  <FallOutlined className="text-red-500" />
+                )
+              ) : null}
             </span>
           </div>
         );
