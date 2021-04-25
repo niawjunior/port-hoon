@@ -46,7 +46,6 @@ const Pie: FC<PieProps> = ({ data }) => {
       sliceLabelsSkipAngle={10}
       sliceLabelsTextColor="#333333"
       tooltip={(input) => {
-        console.log(input.datum.color);
         return (
           <div className="w-60 text-center h-full bg-yellow-200	 rounded-sm shadow-lg relative flex items-center p-2">
             <div
@@ -57,9 +56,11 @@ const Pie: FC<PieProps> = ({ data }) => {
               }}
             ></div>
             <span className="px-2 text-xs break-words">
-              {`${input.datum.id} ${numeral(input.datum?.data?.value).format(
-                "0.0a"
-              )} หุ้น avg ${findData(String(input.datum.id))?.avg} market ${
+              {`Symbol ${input.datum.id} Vol ${numeral(
+                input.datum?.data?.value
+              ).format("0.0a")} Avg ${
+                findData(String(input.datum.id))?.avg
+              } Market ${
                 findData(String(input.datum.id))?.market
               } %U.PL ${getPercentageChange(
                 Number(findData(String(input.datum.id))?.avg),
@@ -68,6 +69,10 @@ const Pie: FC<PieProps> = ({ data }) => {
             </span>
           </div>
         );
+      }}
+      valueFormat={(value) => {
+        console.log(value);
+        return `${numeral(value).format("0,0")}  หุ้น`;
       }}
     />
   );

@@ -1,8 +1,8 @@
-import React, { FC } from "react";
+import React, { FC, lazy } from "react";
 import "./App.less";
 import "tailwindcss/tailwind.css";
 import { Route, Switch } from "react-router-dom";
-import Home from "./pages/home";
+const Home = lazy(() => import("./pages/home"));
 
 const App: FC = () => {
   return (

@@ -4,15 +4,19 @@ import {
   PlusOutlined,
   CalculatorOutlined,
 } from "@ant-design/icons";
-import { FC, useState } from "react";
+import { FC } from "react";
+import styled from "styled-components";
 
 interface FormProps {
   submitForm: (value: any) => typeof value;
 }
 
+const StyleInputNumber = styled(InputNumber)`
+  width: 100%;
+`;
+
 const MainForm: FC<FormProps> = ({ submitForm }) => {
   const [form] = Form.useForm();
-  const [setData, data] = useState([] as any);
   const onFinish = (values: any) => {
     submitForm(values);
   };
@@ -79,14 +83,13 @@ const MainForm: FC<FormProps> = ({ submitForm }) => {
                         },
                       ]}
                     >
-                      <InputNumber
-                        formatter={(value) =>
+                      <StyleInputNumber
+                        formatter={(value: any) =>
                           `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                         }
-                        parser={(value) =>
+                        parser={(value: any) =>
                           value ? value.replace(/\$\s?|(,*)/g, "") : ""
                         }
-                        className="w-full"
                         placeholder="จำนวน"
                       />
                     </Form.Item>
@@ -104,10 +107,7 @@ const MainForm: FC<FormProps> = ({ submitForm }) => {
                         },
                       ]}
                     >
-                      <InputNumber
-                        className="w-full"
-                        placeholder="ราคาที่ซื้อมา"
-                      />
+                      <StyleInputNumber placeholder="ราคาที่ซื้อมา" />
                     </Form.Item>
                   </Col>
                   <Col lg={6} sm={24} xs={24}>
@@ -124,10 +124,7 @@ const MainForm: FC<FormProps> = ({ submitForm }) => {
                         },
                       ]}
                     >
-                      <InputNumber
-                        className="w-full"
-                        placeholder="ราคาปัจจุบัน"
-                      />
+                      <StyleInputNumber placeholder="ราคาปัจจุบัน" />
                     </Form.Item>
                   </Col>
                 </Row>
