@@ -22,19 +22,19 @@ const About: FC = () => {
           style={{ width: "100%" }}
         >
           <Row gutter={[20, 16]}>
-            <Col lg={4}>
+            <Col lg={6}>
               <p>1. เปิดเว็บไซต์ด้วย Safari</p>
               <img width={200} src={step1} alt="step1" />
             </Col>
-            <Col lg={4}>
+            <Col lg={6}>
               <p>2. กด เพิ่มไปยังหน้าหลัก</p>
               <img width={200} src={step2} alt="step2" />
             </Col>
-            <Col lg={4}>
+            <Col lg={6}>
               <p>3. กด เพิ่ม</p>
               <img width={200} src={step3} alt="step3" />
             </Col>
-            <Col lg={4}>
+            <Col lg={6}>
               <p>4. กดที่ไอคอนเพื่อเข้าใช้งาน</p>
               <img width={200} src={step4} alt="step4" />
             </Col>
