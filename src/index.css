@@ -9,6 +9,10 @@ svg {
     height: 100vh !important;
     z-index: 1 !important;
   }
+
+  .custom-tooltip {
+    width: 15rem !important;
+  }
 }
 
 .ant-menu-item:first-child {

@@ -51,7 +51,7 @@ const Pie: FC<PieProps> = ({ data }) => {
       tooltip={(input) => {
         const data = findData(String(input.datum.id));
         return (
-          <div className="w-max md:w-60 lg:w-max text-center h-full bg-yellow-200	 rounded-sm shadow-lg flex items-center p-2">
+          <div className="w-max custom-tooltip text-center h-full bg-yellow-200	 rounded-sm shadow-lg flex items-center p-2">
             <div
               style={{
                 width: "25px",
@@ -60,12 +60,12 @@ const Pie: FC<PieProps> = ({ data }) => {
               }}
             ></div>
             <div className="px-2 text-xs border-r-2 border-black">
-              <p className="border-b-2 border-black">
+              <p className="border-b-2 border-black break-words">
                 {`Symbol: ${input.datum.id} Avail Vol: ${numeral(
                   input.datum?.data?.value
                 ).format("0.0a")} Avg: ${data?.avg} Market: ${data?.market}`}
               </p>
-              <p>
+              <p className="break-words">
                 {`%U.PL: ${getPercentageChange(
                   Number(data?.avg),
                   Number(data?.market)
@@ -80,13 +80,13 @@ const Pie: FC<PieProps> = ({ data }) => {
               </p>
             </div>
             <div className="p-2 text-xs">
-              <p className="border-b-2 border-black">
+              <p className="border-b-2 border-black break-words">
                 Amount:{" "}
                 {numeral(Number(data?.available) * Number(data?.avg)).format(
                   "0.0a"
                 )}
               </p>
-              <p>
+              <p className="break-words">
                 Market Val:{" "}
                 {numeral(Number(data?.available) * Number(data?.market)).format(
                   "0.0a"
