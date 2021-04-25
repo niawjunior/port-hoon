@@ -51,7 +51,7 @@ const Pie: FC<PieProps> = ({ data }) => {
       tooltip={(input) => {
         const data = findData(String(input.datum.id));
         return (
-          <div className="w-60 text-center h-full bg-yellow-200	 rounded-sm shadow-lg relative flex items-center p-2">
+          <div className="w-max md:w-60 lg:w-max text-center h-full bg-yellow-200	 rounded-sm shadow-lg flex items-center p-2">
             <div
               style={{
                 width: "25px",
@@ -59,23 +59,40 @@ const Pie: FC<PieProps> = ({ data }) => {
                 backgroundColor: input.datum?.color,
               }}
             ></div>
-            <span className="px-2 text-xs break-words">
-              {`Symbol ${input.datum.id} Vol ${numeral(
-                input.datum?.data?.value
-              ).format("0.0a")} Avg ${data?.avg} Market ${
-                data?.market
-              } %U.PL ${getPercentageChange(
-                Number(data?.avg),
-                Number(data?.market)
-              )}`}{" "}
-              {data ? (
-                data?.avg < data?.market ? (
-                  <RiseOutlined className="text-green-500" />
-                ) : data?.avg === data?.market ? null : (
-                  <FallOutlined className="text-red-500" />
-                )
-              ) : null}
-            </span>
+            <div className="px-2 text-xs border-r-2 border-black">
+              <p className="border-b-2 border-black">
+                {`Symbol: ${input.datum.id} Avail Vol: ${numeral(
+                  input.datum?.data?.value
+                ).format("0.0a")} Avg: ${data?.avg} Market: ${data?.market}`}
+              </p>
+              <p>
+                {`%U.PL: ${getPercentageChange(
+                  Number(data?.avg),
+                  Number(data?.market)
+                )} `}
+                {data ? (
+                  data?.avg < data?.market ? (
+                    <RiseOutlined className="text-green-500" />
+                  ) : data?.avg === data?.market ? null : (
+                    <FallOutlined className="text-red-500" />
+                  )
+                ) : null}
+              </p>
+            </div>
+            <div className="p-2 text-xs">
+              <p className="border-b-2 border-black">
+                Amount:{" "}
+                {numeral(Number(data?.available) * Number(data?.avg)).format(
+                  "0.0a"
+                )}
+              </p>
+              <p>
+                Market Val:{" "}
+                {numeral(Number(data?.available) * Number(data?.market)).format(
+                  "0.0a"
+                )}
+              </p>
+            </div>
           </div>
         );
       }}
